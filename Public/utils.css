@@ -1,0 +1,38 @@
+.flex{
+    display: flex;
+}
+.flex-dir-c{
+    flex-direction: column;
+}
+.flex-dir-r{
+    flex-direction: row;
+}
+
+.justifyc{
+    justify-content: center;
+}
+
+.m-auto{
+    margin: auto;
+}
+
+.j-right{
+    display: flex;
+    justify-content: right;
+}
+
+.aligni{
+    align-items: center;
+}
+
+.block{
+    display: block;
+}
+
+.hide{
+    visibility:hidden;
+}
+
+.visible{
+    visibility: visible;
+}
