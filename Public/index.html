@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Merger</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="utils.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=add_circle" />
+
+<body>
+    <nav class="flex justifyc aligni flex-dir-r">
+        <li>Your PDF Merger</li>
+    </nav>
+
+    <main class="flex flex-dir-c aligni">
+
+        <div class="top">
+            <p id="ToolInfo">Merge multiple PDF files into a single document.</p>
+        </div>
+
+
+        <div class="middle flex justifyc aligni">
+            <form id="User_Pdf" class="flex flex-dir-c" enctype="multipart/form-data">
+                <div id="FileList">
+
+                </div>
+                <label for="pdfFiles" class="file-label flex justifyc aligni">Upload File</label>
+                <input type="file" id="pdfFiles" name="pdfFiles" multiple hidden>
+                <input type="button" id="MergeBtn" class="m-auto" value="Merge">
+
+            </form>
+        </div>
+    </main>
+</body>
+<script src="UploadFiles.js"></script>
+
+</html>
