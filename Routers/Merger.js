@@ -21,6 +21,9 @@ const storage = multer.diskStorage({
     }
 });
 
+const protocol = req.protocol; // Will be 'http' on localhost, 'https' on Render
+const host = req.get('host');
+
 const upload = multer({ storage: storage });
 
 
@@ -75,7 +78,7 @@ router.post("/", upload.array('pdfFiles', 10), async (req, res) => {
     fs.writeFileSync(`merged.pdf`, pdfBytes);
     //Sending url to the client to download the merged pdf
     try {
-        res.json({ downloadUrl: 'http://localhost:3000/uploads/merged.pdf' });
+        res.json({ downloadUrl: `${protocol}:/${host}/uploads/merged.pdf` });
     }
     catch (err) {
         console.log("Error in sending file: ", err);
