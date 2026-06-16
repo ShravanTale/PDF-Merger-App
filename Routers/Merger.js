@@ -21,9 +21,6 @@ const storage = multer.diskStorage({
     }
 });
 
-const protocol = req.protocol; // Will be 'http' on localhost, 'https' on Render
-const host = req.get('host');
-
 const upload = multer({ storage: storage });
 
 
