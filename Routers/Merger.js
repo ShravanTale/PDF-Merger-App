@@ -78,7 +78,7 @@ router.post("/", upload.array('pdfFiles', 10), async (req, res) => {
     fs.writeFileSync(`merged.pdf`, pdfBytes);
     //Sending url to the client to download the merged pdf
     try {
-        res.json({ downloadUrl: `${protocol}:/${host}/uploads/merged.pdf` });
+        res.json({ downloadUrl: 'https://pdf-merger-app-bxtk.onrender.com/uploads/merged.pdf' });
     }
     catch (err) {
         console.log("Error in sending file: ", err);
