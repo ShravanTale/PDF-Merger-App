@@ -95,5 +95,20 @@ main {
     font-weight: 900;
     cursor: pointer;
     text-shadow: 1px 1px 7px rgb(1, 1, 1);
-    margin:auto;
+    margin: auto;
+}
+
+#Download {
+    display: none;
+    color: white;
+    height: 132px;
+    width: 353px;
+    border: none;
+    background-color: rgb(0 0 0);
+    font-size: 58px;
+    font-weight: 600;
+    font-family: system-ui;
+    box-shadow: -5px 10px 29px 1px rgb(2 0 5);
+    border-radius: 5px;
+    cursor: pointer;
 }
