@@ -21,6 +21,8 @@ const storage = multer.diskStorage({
     }
 });
 
+
+
 const upload = multer({ storage: storage });
 
 
@@ -88,8 +90,13 @@ router.post("/", upload.array('pdfFiles', 10), async (req, res) => {
 
 //Endpoint to download the merged pdf
 router.get('/merged.pdf', (req, res) => {
-
-    res.sendFile(path.join(__dirname, '..', 'merged.pdf'));
+   try{
+    res.download('merged.pdf');
+    console.log("File downloaded!")
+}
+catch (err) {
+        console.log("Error in sending file: ", err);
+    }
 
 });
 
