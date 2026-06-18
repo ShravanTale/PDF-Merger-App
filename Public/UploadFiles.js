@@ -11,6 +11,10 @@ const formData = new FormData();
 
 // Function to fetch files and send to server
 async function fetchFiles(e) {
+  const UploadObjects = [mergeBtn, label, ListFiles];
+    for (let item of UploadObjects) {
+      item.style.display = 'none';
+    }
   LoadingBar.style.display = "block";
   mergeBtn.value = "Merging..."
 
@@ -23,11 +27,6 @@ async function fetchFiles(e) {
   const response = await fetch("/uploads", options);
   if (response.ok) {
     const blob = await response.blob();
-
-    const UploadObjects = [mergeBtn, label, ListFiles];
-    for (let item of UploadObjects) {
-      item.style.display = 'none';
-    }
     LoadingBar.style.display = "none";
      DownloadBtn.style.display = 'flex';
     DownloadBtn.classList.add('flex-all');
