@@ -4,7 +4,7 @@ const ListFiles = document.getElementById('FileList');
 const label = document.querySelector('.file-label');
 const mergeBtn = document.getElementById('MergeBtn');
 const addIcon = document.querySelector('.add-icon');
-const Download = document.getElementById('Download');
+const DownloadBtn = document.getElementById('Download');
 
 
 const formData = new FormData();
@@ -13,32 +13,37 @@ const formData = new FormData();
 async function fetchFiles(e) {
 
   mergeBtn.value = "Merging..."
-  
+
   console.log("Merge button clicked and file lenght is: ", formData.getAll('pdfFiles').length);
   const options = {
     method: 'POST',
     body: formData,
   };
-  
+
   const response = await fetch("/uploads", options);
-  const data = await response.json();
   if (response.ok) {
-    // Manually trigger the download or redirect once you know the file is ready
-    const UploadObjects = [mergeBtn,label,ListFiles];
-    for( let item of UploadObjects){
+    const blob = await response.blob();
+
+    const UploadObjects = [mergeBtn, label, ListFiles];
+    for (let item of UploadObjects) {
       item.style.display = 'none';
     }
-    Download.style.display = 'block';
-    Download.addEventListener('click', ()=>{
-      window.location.href = data.downloadUrl;
+     DownloadBtn.style.display = 'flex';
+    DownloadBtn.classList.add('flex-all');
 
-    }) // This will redirect the user to the download URL 
+    DownloadBtn.addEventListener('click', () => {
+      console.log("Donwload Button clicked")
+
+      const dynamicDownloadUrl = URL.createObjectURL(blob);
+      console.log(dynamicDownloadUrl);
+      DownloadBtn.href = dynamicDownloadUrl;
+      DownloadBtn.download = "your-merged-document.pdf";
+
+    }) 
 
   } else {
-    console.error("Upload failed");
+    console.error("Download Failed");
   }
-  console.log(data);
-
 }
 
 //Function to handle file selection
