@@ -4,27 +4,19 @@ const fs = require('fs');
 // const path = require('path');
 const multer = require('multer');
 const path = require('path');
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'uploadedFiles/');
-    },
-    filename: (req, file, cb) => {
-        cb(null, file.originalname);
-    },
+const storage = multer.memoryStorage();
+
+const upload = multer({
+    storage: storage,
     fileFilter: (req, file, cb) => {
-        // Check the incoming MIME type securely
-        if (file.mimetype === 'application/pdf') {
-            cb(null, true); // Accept the file
-        } else {
-            cb(new Error('Only PDFs are allowed!'), false); // Reject the file
+        // 3. Verify the file extension
+        const ext = path.extname(file.originalname).toLowerCase();
+        if (ext !== '.pdf') {
+            return cb(new Error('Only PDFs are allowed!'), false);
         }
+        cb(null, true);
     }
 });
-
-
-
-const upload = multer({ storage: storage });
-
 
 // middleware that is specific to this router
 const timeLog = (req, res, next) => {
@@ -38,8 +30,8 @@ router.use(timeLog);
 
 router.post("/", upload.array('pdfFiles', 10), async (req, res) => {
 
-    const File1 = await req.files[0];
-    const File2 = await req.files[1];
+    const File1 = await req.files[0].originalname;
+    const File2 = await req.files[1].originalname;
 
     console.log("File 1 is ", File1);
     console.log("File 2 is ", File2);
@@ -57,9 +49,8 @@ router.post("/", upload.array('pdfFiles', 10), async (req, res) => {
     // // // In the browser, you could make a fetch() call and use res.arrayBuffer()
     for (const file of req.files) {
         //Reading File
-        const DonorPdfBytes = fs.readFileSync(file.path);
         //Loading File
-        const DonorPdfDoc = await PDFDocument.load(DonorPdfBytes)
+        const DonorPdfDoc = await PDFDocument.load(file.buffer)
         //Getting page count to know how many pages to copy from the donor pdf to the new pdf
         const PageLength = DonorPdfDoc.getPageCount();
         console.log("Page length is ", PageLength);
@@ -74,10 +65,11 @@ router.post("/", upload.array('pdfFiles', 10), async (req, res) => {
     // // // Serialize the PDFDocument to bytes (a Uint8Array)
     const pdfBytes = await pdfDoc.save()
     //Writing the merged pdf to the file system
-    fs.writeFileSync(`merged.pdf`, pdfBytes);
     //Sending url to the client to download the merged pdf
     try {
-        res.json({ downloadUrl: 'https://pdf-merger-app-bxtk.onrender.com/uploads/merged.pdf' });
+        res.setHeader('Content-Type', 'application/pdf');
+        res.setHeader('Content-Disposition', 'attachment; filename="merged.pdf"');
+        res.send(pdfBytes);
     }
     catch (err) {
         console.log("Error in sending file: ", err);
@@ -87,18 +79,6 @@ router.post("/", upload.array('pdfFiles', 10), async (req, res) => {
 
 
 
-
-//Endpoint to download the merged pdf
-router.get('/merged.pdf', (req, res) => {
-   try{
-    res.download('merged.pdf');
-    console.log("File downloaded!")
-}
-catch (err) {
-        console.log("Error in sending file: ", err);
-    }
-
-});
 
 
 
