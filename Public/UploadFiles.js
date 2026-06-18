@@ -5,7 +5,7 @@ const label = document.querySelector('.file-label');
 const mergeBtn = document.getElementById('MergeBtn');
 const addIcon = document.querySelector('.add-icon');
 const DownloadBtn = document.getElementById('Download');
-const LoadingBar = document.getElementById('LoadingSection');
+const LoadingBar = document.getElementById('loadingSection');
 
 const formData = new FormData();
 
