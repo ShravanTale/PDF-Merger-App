@@ -12,6 +12,12 @@
     justify-content: center;
 }
 
+.flex-all{
+    display: flex;
+    justift-content: center;
+    align-items: center;
+}
+
 .m-auto{
     margin: auto;
 }
