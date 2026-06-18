@@ -5,13 +5,13 @@ const label = document.querySelector('.file-label');
 const mergeBtn = document.getElementById('MergeBtn');
 const addIcon = document.querySelector('.add-icon');
 const DownloadBtn = document.getElementById('Download');
-
+const LoadingBar = document.getElementById('LoadingSection');
 
 const formData = new FormData();
 
 // Function to fetch files and send to server
 async function fetchFiles(e) {
-
+  LoadingBar.style.display = "block";
   mergeBtn.value = "Merging..."
 
   console.log("Merge button clicked and file lenght is: ", formData.getAll('pdfFiles').length);
@@ -28,6 +28,7 @@ async function fetchFiles(e) {
     for (let item of UploadObjects) {
       item.style.display = 'none';
     }
+    LoadingBar.style.display = "none";
      DownloadBtn.style.display = 'flex';
     DownloadBtn.classList.add('flex-all');
 
