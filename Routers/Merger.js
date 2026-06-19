@@ -28,7 +28,7 @@ router.use(timeLog);
 // define the home page route
 // define the about route
 
-router.post("/", upload.array('pdfFiles', 10), async (req, res) => {
+router.post("/", upload.array('pdfFiles', 20), async (req, res) => {
 
     const File1 = await req.files[0].originalname;
     const File2 = await req.files[1].originalname;
