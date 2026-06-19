@@ -8,6 +8,7 @@ const DownloadBtn = document.getElementById('Download');
 const LoadingCircle = document.getElementById('loadingSection');
 const Tagline = document.querySelector('.top')
 const percent = document.getElementById('percent');
+const middle = document.querySelector('.middle');
 
 const formData = new FormData();
 
@@ -15,14 +16,18 @@ const formData = new FormData();
 async function fetchFiles(e) {
   LoadingCircle.style.display = 'block';
   percent.innerText = "0%";
-  mergeBtn.value = "Merging...";
+  const UploadObjects = [mergeBtn, label, ListFiles];
+    for (let item of UploadObjects) {
+      item.style.display = 'none';
+    }
+  middle.style.marginTop = "89px";
   setTimeout(() => {
     percent.innerText = "30%";
   }, 500);
 
   setTimeout(() => {
     percent.innerText = "90%";
-  }, 5000);
+  }, 8000);
 
   console.log("Merge button clicked and file lenght is: ", formData.getAll('pdfFiles').length);
   const options = {
@@ -35,10 +40,7 @@ async function fetchFiles(e) {
     const blob = await response.blob();
     percent.innerText = "100%";
 
-    const UploadObjects = [mergeBtn, label, ListFiles];
-    for (let item of UploadObjects) {
-      item.style.display = 'none';
-    }
+    
     LoadingCircle.style.display = 'none';
 
     DownloadBtn.style.display = 'flex';
