@@ -4,10 +4,10 @@
 }
 
 nav {
-    background-color: #181b1f;
+    background-color: rgb(34, 35, 47);
+    border-bottom: 2px solid #645959;
     height: 80px;
     width: 100%;
-    box-shadow: 1px 1px 20px 3px rgb(202 7 151);
 
 }
 
@@ -42,16 +42,16 @@ main {
 
 .middle {
     width: 100%;
-    height: 40vh;
+    height: 60vh;
     background-color: #000000;
 }
 
 .file-label:hover,
 #subBtn:hover {
-  transition: all 0.2s;
-  height: 110px;
-  width: 300px;
-  font-size: 40px;
+    transition: all 0.2s;
+    height: 110px;
+    width: 300px;
+    font-size: 40px;
 }
 
 .file-label {
@@ -70,11 +70,11 @@ main {
 }
 
 #MergeBtn {
-  color: rgb(104 91 91);
+    color: rgb(104 91 91);
     height: 62px;
     width: 200px;
     border: none;
-    background-color: rgb(36 34 41);
+    background-color: rgb(40, 40, 49);
     font-size: 30px;
     font-weight: 600;
     font-family: system-ui;
@@ -116,7 +116,7 @@ main {
     text-decoration: none;
 }
 
-#percent{
+#percent {
     color: white;
     font-size: 24px;
     font-family: system-ui;
